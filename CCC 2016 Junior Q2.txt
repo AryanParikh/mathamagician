@@ -1,0 +1,63 @@
+//CCC 2016
+//Junior Q2
+//Written by Aryan Parikh
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+
+void main(){
+
+	int square[4][4];
+	bool magic = true;
+	int row = 0;
+	int column = 0;
+	int sumInit = 0;
+	int sumNew = 0;
+	const int size = 4;
+
+	//Inputting the square
+	for (; row < size; row++){
+		for (column = 0; column < size; column++){
+			scanf("%d", &square[row][column]);
+		}
+	}
+
+	//Setting the initial value
+	for (column = 0; column < size; column++){
+		sumInit += square[1][column];
+	}
+
+	//Checking if horizontal values match
+	for (row = 0; row < size; row++){
+		for (column = 0, sumNew = 0; column < size; column++){
+			sumNew += square[row][column];
+		}
+
+		if (sumNew != sumInit){
+			magic = false;
+			break;
+		}
+	}
+
+	//Checking if vertical values match
+	for (column = 0; column < size; column++){
+		for (row = 0, sumNew = 0; row < size; row++){
+			sumNew += square[row][column];
+		}
+
+		if (sumNew != sumInit){
+			magic = false;
+			break;
+		}
+	}
+
+	//Output statement
+	if (magic){
+		printf("magic");
+	}
+	else
+	{
+		printf("not magic");
+	}
+}

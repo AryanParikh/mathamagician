@@ -1,0 +1,49 @@
+//CCC 2016
+//Senior Q1 using dynamic memory allocation
+//Memory effecient of harder to implement
+//Written by Aryan Parikh
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void main(){
+
+	int n = 0;
+	int output = 0;
+	int *swifts = NULL;
+	int *semaphores = NULL;
+
+	scanf("%d", &n);
+
+	swifts = (int*)malloc(sizeof(int)*n);
+	semaphores = (int*)malloc(sizeof(int)*n);
+
+	if (swifts == NULL || semaphores == NULL){
+		printf("Insufficient memory\n");
+		return;
+	}
+
+	for (int i = 0; i < n; i++){
+		int run = 0;
+		scanf("%d", &run);
+
+		*(swifts + i) = run;
+		*(swifts + i) += i == 0 ? 0 : *(swifts + i - 1);
+	}
+
+	for (int i = 0; i < n; i++){
+		int run = 0;
+		scanf("%d", &run);
+
+		*(semaphores + i) = run;
+		*(semaphores + i) += i == 0 ? 0 : *(semaphores + i - 1);
+
+		if (*(semaphores + i) == *(swifts + i)){
+			output = i + 1;
+		}
+	}
+
+
+	printf("%d", output);
+
+}

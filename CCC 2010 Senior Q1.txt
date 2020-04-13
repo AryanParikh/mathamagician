@@ -1,0 +1,92 @@
+//CCC 2010
+//Senior Q1
+//Written by Aryan Parikh
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void main(){
+
+	//Define structure
+	struct computer{
+		char name[20];
+		long score;
+	};
+
+	//Create an array of pointers of type 'computer'
+	struct computer *pInput[10000];
+
+	//Get total number of computers
+	int n = 0;
+	scanf("%d", &n);
+
+	//If n is 0
+	if (n == 0){
+		return;
+	}
+
+	//Process each input
+	for (int i = 0; i < n; i++){
+
+		//Allocate memory for a computer variable
+		pInput[i] = (struct computer*)malloc(sizeof(struct computer));
+		
+		//Check for insufficient memory
+		if (pInput[i] == NULL){
+			printf("Insufficient memory\n");
+			return;
+		}
+
+		//Declare local variables
+		int ram = 0;
+		int cpu = 0;
+		int ddr = 0;
+
+		//Get inputs
+		scanf("%s", (*pInput[i]).name);
+		scanf("%d", &ram);
+		scanf("%d", &cpu);
+		scanf("%d", &ddr);
+
+		//Evaluate score
+		(*pInput[i]).score = (2 * ram) + (3 * cpu) + (ddr);
+	}
+
+	//If there's just one computer
+	if (n == 1){
+		printf("%s", (*pInput[0]).name);
+		return;
+	}
+
+	//Bubble sort the inputs
+	for (int i = 0; i < n; i++){
+		for (int j = i; j < n; j++){
+			//If scores are same, sort by name
+			if ((*pInput[i]).score == (*pInput[j]).score){
+				if (strcmp((*pInput[i]).name, (*pInput[j]).name) > 0){
+					struct computer temp;
+					temp = *pInput[i];
+					*pInput[i] = *pInput[j];
+					*pInput[j] = temp;
+				}
+			}
+			//If scores are not same, sort by score
+			else{
+				if ((*pInput[j]).score > (*pInput[i]).score){
+					struct computer temp;
+					temp = *pInput[i];
+					*pInput[i] = *pInput[j];
+					*pInput[j] = temp;
+				}
+			}
+		}
+	}
+
+	//Output first 2 computers
+	for (int i = 0; i < 2; i++){
+		printf("%s\n", (*pInput[i]).name);
+	}	
+}
+

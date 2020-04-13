@@ -1,0 +1,62 @@
+//CCC 2015
+//Junior Q4
+//Written by Aryan Parikh
+
+#include <stdio.h>
+#include <stdbool.h>
+
+void main(){
+	int count = 0;
+	int number[101] = { 0 };
+	int X = 0;
+	int time = 0;
+	int line = 0;
+	char a = 0; //A as in action
+	char space = 0;
+
+	scanf("%d", &count);
+
+
+
+	for (; line < count; line++){
+
+		scanf("%c %d", &a, &X);
+		scanf("%c %d", &a, &X);
+
+		switch (a)
+		{
+		case 'R':
+			number[X] = number[X] - time;
+			time++;
+			break;
+
+		case 'S':
+			number[X] = number[X] + time;
+			time++;
+			break;
+
+		case 'W':
+			time += X - 1;
+			break;
+
+		default:
+			printf("Error");
+			break;
+		}
+
+		X++;
+	}
+
+	line = 0;
+
+	for (; line < 101; line++){
+		if (number[line] != 0){
+			if (number[line] > 0){
+				printf("%d %d\n", line, number[line]);
+			}
+			else {
+				printf("%d -1\n", line);
+			}
+		}
+	}
+}

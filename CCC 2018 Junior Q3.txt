@@ -1,0 +1,49 @@
+//CCC 2018
+//Junior Q3
+//Written by Aryan Parikh
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int distances[4] = { 0 };
+int difference = 0;
+int totalDistance = 0;
+
+void main(){
+
+	for (int i = 0; i < 4; i++){
+		scanf("%d", &distances[i]);
+	}
+
+	//Loop for evaluating each city
+	for (int cityStart = 0; cityStart < 5; cityStart++){
+		//Loop for evaluating each distance
+		for (int cityEnd = 0; cityEnd < 5; cityEnd++){
+			difference = cityEnd - cityStart;
+
+			totalDistance = 0;
+
+			if (difference > 0){
+				//Distance is positive
+				for (int i = cityStart; i < cityEnd; i++){
+					totalDistance += distances[i];
+				}
+			}
+
+			else if (difference == 0){
+				//Distance is 0
+				totalDistance = 0;
+			}
+
+			else{
+				//Distance is negative
+				for (int i = cityEnd; i < cityStart; i++){
+					totalDistance += distances[i];
+				}
+			}
+
+			printf("%d ", totalDistance);
+		}
+		printf("\n");
+	}
+}

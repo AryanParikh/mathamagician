@@ -1,0 +1,74 @@
+//CCC 2014
+//Junior Q5
+//Written by Aryan Parikh
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+//Function prototype
+long numericValue(char a[20]);
+
+//Variables
+int N = 0;
+int whatever = 0;
+char line1[30][20] = { { 0 } };
+char line2[30][20] = { { 0 } };
+long partners[30][2] = { { 0 } };
+bool consistent = true;
+bool matchFound = false;
+
+void main(void){
+
+	whatever = scanf("%d", &N);
+
+	for (int i = 0; i < N; i++)
+		whatever = scanf("%s", &line1[i][0]);
+
+	for (int i = 0; i < N; i++)
+		whatever = scanf("%s", &line2[i][0]);
+
+	for (int i = 0; i < N; i++){
+		//Assign values
+		partners[i][0] = numericValue(line1[i]);
+
+		partners[i][1] = numericValue(line2[i]);
+	}
+
+	for (int i = 0; i < N; i++){
+		//Check values
+		for (int j = 0; j < N; j++){
+			if (partners[j][0] == partners[i][1] && partners[j][1] == partners[i][0] && partners[j][0] != partners[j][1]){
+				//It's good
+				matchFound = true;
+			}
+		}
+
+		if (!matchFound){
+			consistent = false;
+			break;
+		}
+		matchFound = false;
+	}
+
+	//Output result
+	printf(consistent ? "good" : "bad");
+}
+
+//Create a distinct number for a given string
+long numericValue(char a[20]){
+
+	long output = 0;
+
+	for (int i = 0; a[i] != '\0'; i++){
+		int multiplier = 1;
+
+		for (int j = 0; j < i; j++){
+			multiplier *= 2;
+		}
+		output += a[i] * multiplier;
+	}
+	return output;
+}

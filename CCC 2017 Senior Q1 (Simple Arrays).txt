@@ -1,0 +1,36 @@
+//CCC 2017
+//Senior Q1 using Arrays
+//Ineffecient in terms for memory consumption but easier to implement
+//Written by Aryan Parikh
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int N = 0;
+int input = 0;
+int sums[100001] = { 0 };
+int sum = 0;
+int K = 0;
+
+//Main Function
+void main(){
+
+	scanf("%d", &N);
+	sums[0] = 0;
+
+	for (int i = 1; i < N + 1; i++){
+		scanf("%d", &input);
+		sums[i] = sums[i - 1] + input;
+	}
+
+	for (int i = 1; i < N + 1; i++){
+		scanf("%d", &input);
+		sum += input;
+		if (sum == sums[i])
+			K = i;
+	}
+
+	printf("%d", K);
+}
